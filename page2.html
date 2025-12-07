@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Giá</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 28px;
+        }
+        .back-btn {
+            display: inline-block;
+            margin: 20px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.7);
+            text-decoration: none;
+            border-radius: 8px;
+            color: #000;
+            font-size: 18px;
+        }
+        .price-table {
+            width: 90%;
+            max-width: 700px;
+            margin: 40px auto;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #666;
+        }
+        th {
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>Bảng Giá</header>
+
+    <a href="website.html" class="back-btn">⬅ Trở về trang chủ</a>
+
+    <div class="price-table">
+        <table>
+            <tr>
+                <th>Dịch vụ</th>
+                <th>Giá</th>
+            </tr>
+            <tr>
+                <td>Gói cơ bản</td>
+                <td>100.000đ</td>
+            </tr>
+            <tr>
+                <td>Gói tiêu chuẩn</td>
+                <td>200.000đ</td>
+            </tr>
+            <tr>
+                <td>Gói cao cấp</td>
+                <td>350.000đ</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>
