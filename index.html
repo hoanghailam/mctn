@@ -3,131 +3,88 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Website với hình nền - Greenhouse</title>
+  <title>Website với hình nền</title>
   <style>
-    :root{
-      --overlay: rgba(0,0,0,0.35);
-      --accent: rgba(255,255,255,0.9);
-      --glass: rgba(255,255,255,0.12);
-      --blur: 8px;
-    }
+    :root{--accent: rgba(255,255,255,0.95);--muted: rgba(0,0,0,0.55)}
     html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
-    /* To use your provided image, save it as "background.jpg" next to this HTML file, or use the Upload button. */
-    body{
-      min-height:100%;
-      background: linear-gradient(var(--overlay), var(--overlay)), url('background.jpg') center/cover no-repeat fixed;
-      display:flex;align-items:center;justify-content:center;color:var(--accent);
+    /* Background */
+    .bg {
+      position:fixed;inset:0;background-image:url('background.jpg'); /* <-- thay bằng đường dẫn ảnh của bạn */
+      background-size:cover;background-position:center center;filter:brightness(0.95) saturate(1.05);
     }
+    /* subtle overlay to keep text readable */
+    .overlay{position:fixed;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.22));pointer-events:none}
 
-    /* Content card */
-    .card{
-      width:min(1100px,92%);
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      border-radius:14px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.45);
-      backdrop-filter: blur(var(--blur));
-      overflow:hidden;
-      display:grid;
-      grid-template-columns: 1fr 380px;
-      gap:20px;
-      padding:28px;
+    .wrap{position:relative;min-height:100vh;display:flex;flex-direction:column;z-index:2}
+    header{padding:28px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{color:var(--accent);font-weight:700;font-size:20px;text-shadow:0 2px 8px rgba(0,0,0,0.35)}
+
+    main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px}
+    .card{max-width:980px;width:100%;background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.80));backdrop-filter: blur(6px);border-radius:12px;padding:28px;box-shadow:0 8px 30px rgba(0,0,0,0.25)}
+    h1{margin:0 0 12px 0;color:#134;letter-spacing:0.4px}
+    p{margin:0 0 18px 0;color:var(--muted);line-height:1.45}
+
+    /* social floating buttons */
+    .social-float{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:12px;z-index:10}
+    .social-btn{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,0.95);box-shadow:0 6px 18px rgba(0,0,0,0.18);text-decoration:none}
+    .social-btn svg{width:26px;height:26px}
+
+    footer{padding:14px 24px;text-align:center;color:var(--muted);font-size:14px}
+
+    /* responsive */
+    @media (max-width:720px){
+      .card{padding:18px;border-radius:10px}
+      header{padding:16px}
+      .brand{font-size:18px}
+      .social-btn{width:50px;height:50px}
     }
-
-    .left{
-      padding:6px 12px;
-    }
-
-    h1{margin:6px 0 8px;font-size:clamp(20px,3.6vw,34px);letter-spacing:0.4px}
-    p{margin:0 0 12px;opacity:0.95}
-
-    .cta{display:flex;gap:12px;margin-top:12px}
-    .btn{background:var(--glass);border:1px solid rgba(255,255,255,0.08);padding:10px 14px;border-radius:10px;color:var(--accent);cursor:pointer}
-
-    /* Right column: controls + preview */
-    .right{padding:12px}
-    .panel{background:rgba(0,0,0,0.18);padding:12px;border-radius:10px}
-    label{display:block;font-size:13px;margin-bottom:8px;opacity:0.95}
-    input[type=file]{width:100%}
-
-    /* Small responsive */
-    @media (max-width:900px){
-      .card{grid-template-columns:1fr;}
-      .right{order:-1}
-    }
-
-    /* Simple footer */
-    .footer{margin-top:8px;font-size:13px;opacity:0.85}
-
-    /* Accessibility focus */
-    .btn:focus, input:focus{outline:2px solid rgba(255,255,255,0.18);outline-offset:3px}
   </style>
 </head>
 <body>
-  <main class="card" role="main">
-    <section class="left">
-      <h1>Greenhouse — Hình nền cho website của bạn</h1>
-      <p>Đây là một mẫu trang đơn (single-file) dùng hình nền full-bleed. Bạn có thể dùng chính ảnh bạn vừa gửi làm background bằng cách lưu ảnh đó thành <code>background.jpg</code> cùng thư mục với file này, hoặc dùng nút "Upload" để thay đổi hình nền ngay trong trình duyệt.</p>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="overlay" aria-hidden="true"></div>
 
-      <div class="cta">
-        <button class="btn" id="downloadBtn">Tải HTML này</button>
-        <a class="btn" href="#" id="openTab">Mở trang mới</a>
-      </div>
+  <div class="wrap">
+    <header>
+      <div class="brand">Tên Website của bạn</div>
+      <nav aria-label="chính">
+        <!-- Bạn có thể thêm link điều hướng ở đây -->
+      </nav>
+    </header>
 
-      <div class="footer">Tip: để nội dung dễ đọc hơn trên ảnh sáng, CSS đã thêm một lớp overlay tối. Muốn đổi opacity/blur, chỉnh biến ở <code>:root</code>.</div>
-    </section>
+    <main>
+      <section class="card" role="region" aria-label="Nội dung chính">
+        <h1>Chào mừng tới website</h1>
+        <p>Đây là mẫu trang đơn với hình nền đẹp — thay ảnh nền bằng ảnh bạn cung cấp bằng cách đổi đường dẫn trong CSS (background.jpg). Nút Facebook và Zalo ở góc phải để khách truy cập dễ liên hệ.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a href="#" class="social-btn" style="width:auto;height:auto;padding:10px 14px;border-radius:8px;background:transparent;box-shadow:none;color:var(--accent);font-weight:600;text-decoration:none">Tìm hiểu thêm</a>
+        </div>
+      </section>
+    </main>
 
-    <aside class="right">
-      <div class="panel">
-        <label for="bgUpload">Upload ảnh nền (chỉ dùng trong trình duyệt)</label>
-        <input type="file" id="bgUpload" accept="image/*">
-        <p style="font-size:13px;margin-top:8px;">Hoặc lưu ảnh của bạn thành <code>background.png</code> và đặt cùng thư mục.</p>
-      </div>
+    <footer>
+      <small>&copy; <span id="year"></span> Tên công ty / Tên bạn. Bảo lưu mọi quyền.</small>
+    </footer>
+  </div>
 
-      <div style="height:14px"></div>
+  <!-- Floating social buttons: Facebook và Zalo -->
+  <div class="social-float" aria-hidden="false">
+    <!-- Facebook -->
+    <a class="social-btn" href="https://facebook.com/yourpage" target="_blank" rel="noopener noreferrer" title="Facebook">
+      <!-- facebook svg -->
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22 12.07C22 6.48 17.52 2 11.93 2 6.35 2 1.87 6.48 1.87 12.07c0 4.99 3.66 9.13 8.45 9.91v-7.01H8.21V12.07h2.11V9.79c0-2.09 1.25-3.24 3.13-3.24.91 0 1.86.16 1.86.16v2.04h-1.04c-1.03 0-1.35.64-1.35 1.3v1.55h2.3l-.37 2.9h-1.93v7.01c4.79-.78 8.45-4.92 8.45-9.91z" fill="#1877F2"/></svg>
+    </a>
 
-      <div class="panel" style="margin-top:10px">
-        <label>Ảnh hiện tại</label>
-        <div id="preview" style="height:160px;border-radius:8px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;overflow:hidden">Chưa có ảnh được upload</div>
-      </div>
-    </aside>
-  </main>
+    <!-- Zalo (link zalo.me or zalo app link) -->
+    <a class="social-btn" href="https://zalo.me/yourid" target="_blank" rel="noopener noreferrer" title="Zalo">
+      <!-- simple zalo-like svg (speech bubble with Z) -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2C6.48 2 2 5.92 2 10.5c0 2.21 1.04 4.24 2.86 5.75L4 22l5.17-1.52C11.02 21.83 11.5 22 12 22c5.52 0 10-3.92 10-8.5S17.52 2 12 2z" fill="#2FA5F9"/><text x="7" y="15.2" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="white">Z</text></svg>
+    </a>
+  </div>
 
   <script>
-    // Upload preview and set background dynamically
-    const upload = document.getElementById('bgUpload');
-    const preview = document.getElementById('preview');
-    upload.addEventListener('change', e => {
-      const file = e.target.files && e.target.files[0];
-      if(!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        const data = reader.result;
-        // set as page background
-        document.body.style.backgroundImage = `linear-gradient(var(--overlay), var(--overlay)), url('${data}')`;
-        preview.style.backgroundImage = `url('${data}')`;
-        preview.textContent = '';
-        preview.style.backgroundSize = 'cover';
-        preview.style.backgroundPosition = 'center';
-      }
-      reader.readAsDataURL(file);
-    });
-
-    // Download the current HTML (so user can save modified page)
-    document.getElementById('downloadBtn').addEventListener('click', ()=>{
-      const html = new XMLSerializer().serializeToString(document.doctype) + '\n' + document.documentElement.outerHTML;
-      const blob = new Blob([html], {type:'text/html'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'greenhouse-background.html';
-      a.click();
-      URL.revokeObjectURL(url);
-    });
-
-    document.getElementById('openTab').addEventListener('click', (evt)=>{
-      evt.preventDefault();
-      window.open(location.href, '_blank');
-    });
+    // set copyright year
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
-    </html>
-    
+</html>
